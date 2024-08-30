@@ -501,13 +501,20 @@ func (env *IdlEnumFields) UnmarshalJSON(data []byte) error {
 
 			firstItem := v[0]
 
-			if _, ok := firstItem.(map[string]interface{})["name"]; ok {
-				// TODO:
-				// If has `name` field, then it's most likely a IdlEnumFieldsNamed.
-				if err := TranscodeJSON(temp, &env.IdlEnumFieldsNamed); err != nil {
-					return err
+			switch vv := firstItem.(type) {
+			case map[string]interface{}:
+				if _, ok := vv["name"]; ok {
+					// TODO:
+					// If has `name` field, then it's most likely a IdlEnumFieldsNamed.
+					if err := TranscodeJSON(temp, &env.IdlEnumFieldsNamed); err != nil {
+						return err
+					}
+				} else {
+					if err := TranscodeJSON(temp, &env.IdlEnumFieldsTuple); err != nil {
+						return err
+					}
 				}
-			} else {
+			case string:
 				if err := TranscodeJSON(temp, &env.IdlEnumFieldsTuple); err != nil {
 					return err
 				}

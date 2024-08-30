@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	. "github.com/dave/jennifer/jen"
 	"github.com/davecgh/go-spew/spew"
 	bin "github.com/gagliardetto/binary"
@@ -337,8 +338,23 @@ func genTypeDef(idl *IDL, withDiscriminator bool, def IdlTypeDef) Code {
 											return nil
 										}())
 								}
-							default:
+							case variant.Fields.IdlEnumFieldsTuple != nil:
 								// TODO: handle tuples
+								for i, variantType := range *variant.Fields.IdlEnumFieldsTuple {
+									structGroup.Add(genField(IdlField{
+										Name: fmt.Sprintf("Elem%d", i),
+										Type: variantType,
+									}, variantType.IsIdlTypeOption())).
+										Add(func() Code {
+											if variantType.IsIdlTypeOption() {
+												return Tag(map[string]string{
+													"bin": "optional",
+												})
+											}
+											return nil
+										}())
+								}
+							default:
 								panic("not handled: " + Sdump(variant.Fields))
 							}
 						},
