@@ -89,7 +89,7 @@
             "name": "openOrdersMarketAuthority",
             "isMut": false,
             "isSigner": false,
-            "optional": true,
+            "isOptional": true,
             "docs": [
                 "open orders market authority (optional)"
             ]
@@ -98,7 +98,7 @@
             "name": "pruneAuthority",
             "isMut": false,
             "isSigner": false,
-            "optional": true,
+            "isOptional": true,
             "docs": [
                 "prune authority (optional, requires open orders market authority)"
             ]
@@ -107,7 +107,7 @@
             "name": "crankAuthority",
             "isMut": false,
             "isSigner": false,
-            "optional": true,
+            "isOptional": true,
             "docs": [
                 "crank authority (optional, requires prune authority)"
             ]
@@ -200,7 +200,7 @@
             "name": "feeDiscounts",
             "isMut": false,
             "isSigner": false,
-            "optional": true,
+            "isOptional": true,
             "docs": [
                 "(optional) the (M)SRM account used for fee discounts"
             ]
@@ -433,7 +433,7 @@
             "name": "referrerPcWallet",
             "isMut": true,
             "isSigner": false,
-            "optional": true,
+            "isOptional": true,
             "docs": [
                 "(optional) referrer pc wallet"
             ]
@@ -635,7 +635,7 @@
             "name": "feeDiscounts",
             "isMut": false,
             "isSigner": false,
-            "optional": true,
+            "isOptional": true,
             "docs": [
                 "(optional) the (M)SRM account used for fee discounts"
             ]
@@ -752,7 +752,7 @@
             "name": "feeDiscounts",
             "isMut": false,
             "isSigner": false,
-            "optional": true,
+            "isOptional": true,
             "docs": [
                 "(optional) the (M)SRM account used for fee discounts"
             ]
@@ -1070,7 +1070,7 @@
             "name": "marketAuthority",
             "isMut": false,
             "isSigner": false,
-            "optional": true,
+            "isOptional": true,
             "docs": [
                 "open orders market authority (optional)."
             ]

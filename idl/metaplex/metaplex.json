@@ -204,7 +204,7 @@
                 "name": "metadataAuthority",
                 "isMut": false,
                 "isSigner": true,
-                "optional": true,
+                "isOptional": true,
                 "docs": [
                     "[optional] Metadata Authority - Signer only required if doing a full ownership txfer"
                 ]
@@ -245,7 +245,7 @@
                 "name": "limitedEditionPrintingMint",
                 "isMut": true,
                 "isSigner": false,
-                "optional": true,
+                "isOptional": true,
                 "docs": [
                     "Limited edition Printing mint account (optional - only if using sending Limited Edition)"
                 ]
@@ -352,7 +352,7 @@
                 "name": "bidder",
                 "isMut": false,
                 "isSigner": true,
-                "optional": true,
+                "isOptional": true,
                 "docs": [
                     "[optional] Your Bidder account - Only needs to be signer if payer does not own"
                 ]
@@ -426,7 +426,7 @@
                 "name": "masterEdition",
                 "isMut": true,
                 "isSigner": false,
-                "optional": true,
+                "isOptional": true,
                 "docs": [
                     "Master edition (if Printing type of WinningConfig)"
                 ]
@@ -435,7 +435,7 @@
                 "name": "reservationListPDA",
                 "isMut": true,
                 "isSigner": false,
-                "optional": true,
+                "isOptional": true,
                 "docs": [
                     "Reservation list PDA ['metadata', program id, master edition key, 'reservation', auction manager key]",
                     "relative to token metadata program (if Printing type of WinningConfig)"
@@ -550,7 +550,7 @@
                 "name": "bidder",
                 "isMut": false,
                 "isSigner": true,
-                "optional": true,
+                "isOptional": true,
                 "docs": [
                     "Your Bidder account - Only needs to be signer if payer does not own"
                 ]
@@ -615,7 +615,7 @@
                 "name": "masterMetadata",
                 "isMut": true,
                 "isSigner": false,
-                "optional": true,
+                "isOptional": true,
                 "docs": [
                     "Master Metadata account (pda of ['metadata', program id, Printing mint id]) - remember PDA is relative to token metadata program",
                     "(This account is optional, and will only be used if metadata is unique, otherwise this account key will be ignored no matter it's value)"
@@ -753,7 +753,7 @@
                 "name": "bidder",
                 "isMut": true,
                 "isSigner": true,
-                "optional": true,
+                "isOptional": true,
                 "docs": [
                     "Your Bidder account - Only needs to be signer if payer does not own"
                 ]
@@ -1108,7 +1108,7 @@
                 "name": "masterEdition",
                 "isMut": false,
                 "isSigner": false,
-                "optional": true,
+                "isOptional": true,
                 "docs": [
                     "The master edition of the metadata (optional if exists)",
                     "(pda of ['metadata', program id, metadata mint id, 'edition']) - remember PDA is relative to token metadata program"
@@ -1719,7 +1719,7 @@
                 "name": "vaultProgram",
                 "isMut": false,
                 "isSigner": false,
-                "optional": true,
+                "isOptional": true,
                 "docs": [
                     "Vault program (Optional)"
                 ]
@@ -2570,7 +2570,7 @@
                 "name": "metadataAuthority",
                 "isMut": false,
                 "isSigner": true,
-                "optional": true,
+                "isOptional": true,
                 "docs": [
                     "Metadata Authority - Signer only required if doing a full ownership txfer"
                 ]
@@ -3014,7 +3014,7 @@
                 "name": "auctionCacheAbove",
                 "isMut": false,
                 "isSigner": false,
-                "optional": true,
+                "isOptional": true,
                 "docs": [
                     "Auction cache above current (pda of ['metaplex', program id, store key, auction key, 'cache'])",
                     "Note: Can pass the below in this slot if there is no above"
@@ -3024,7 +3024,7 @@
                 "name": "auctionCacheBelow",
                 "isMut": false,
                 "isSigner": false,
-                "optional": true,
+                "isOptional": true,
                 "docs": [
                     "Auction cache below current (pda of ['metaplex', program id, store key, auction key, 'cache'])"
                 ]

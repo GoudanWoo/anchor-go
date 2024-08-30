@@ -746,7 +746,7 @@ func GenerateClientFromProgramIDL(idl IDL) ([]*FileWrapper, error) {
 						instruction.Accounts.Walk("", nil, nil, func(groupPath string, accountIndex int, parentGroup *IdlAccounts, ia *IdlAccount) bool {
 							exportedAccountName := ToCamel(filepath.Join(groupPath, ia.Name))
 
-							if ia.Optional {
+							if ia.IsOptional != nil && *ia.IsOptional == true {
 								accountValidationBlock.Line().Commentf(
 									"[%v] = %s is optional",
 									accountIndex,
@@ -1061,7 +1061,7 @@ func genAccountGettersSetters(
 	{ // Create account getters:
 		code.Line().Line()
 		name := formatAccountAccessorName("Get", exportedAccountName)
-		if account.Optional {
+		if account.IsOptional != nil && *account.IsOptional == true {
 			code.Commentf("%s gets the %q account (optional).", name, account.Name).Line()
 		} else {
 			code.Commentf("%s gets the %q account.", name, account.Name).Line()

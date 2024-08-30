@@ -9,6 +9,8 @@ import (
 )
 
 // https://github.com/project-serum/anchor/blob/97e9e03fb041b8b888a9876a7c0676d9bb4736f3/ts/src/idl.ts
+// https://github.com/coral-xyz/anchor/blob/4853cd1da7c81239dd261d943d165095c220d79f/ts/packages/anchor/src/idl.ts
+// https://github.com/coral-xyz/anchor/blob/4853cd1da7c81239dd261d943d165095c220d79f/idl/src/convert.rs
 type IDL struct {
 	Version      string           `json:"version"`
 	Name         string           `json:"name"`
@@ -191,11 +193,11 @@ func (env *IdlAccountItem) UnmarshalJSON(data []byte) error {
 }
 
 type IdlAccount struct {
-	Docs     []string `json:"docs"` // @custom
-	Name     string   `json:"name"`
-	IsMut    bool     `json:"isMut"`
-	IsSigner bool     `json:"isSigner"`
-	Optional bool     `json:"optional"` // @custom
+	Docs       []string `json:"docs"` // @custom
+	Name       string   `json:"name"`
+	IsMut      bool     `json:"isMut"`
+	IsSigner   bool     `json:"isSigner"`
+	IsOptional *bool    `json:"isOptional,omitempty"`
 }
 
 // A nested/recursive version of IdlAccount.
