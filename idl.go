@@ -235,12 +235,18 @@ const (
 	IdlTypeDuration      IdlTypeAsString = "duration"
 
 	// | IdlTypeVec
+	// | IdlTypeHashMap
 	// | IdlTypeOption
 	// | IdlTypeDefined;
 )
 
 type IdlTypeVec struct {
 	Vec IdlType `json:"vec"`
+}
+
+type IdlTypeHashMap struct {
+	Key   IdlType
+	Value IdlType
 }
 
 type IdlTypeOption struct {
@@ -290,6 +296,25 @@ func (env *IdlType) UnmarshalJSON(data []byte) error {
 				}
 				env.asIdlTypeVec = &target
 			}
+			if got, ok := v["hashMap"]; ok {
+
+				if _, ok := got.([]interface{}); !ok {
+					panic(Sf("hashMap is not in expected format:\n%s", spew.Sdump(got)))
+				}
+				arrVal := got.([]interface{})
+				if len(arrVal) != 2 {
+					panic(Sf("hashMap is not of expected length:\n%s", spew.Sdump(got)))
+				}
+				var target IdlTypeHashMap
+				if err := TranscodeJSON(arrVal[0], &target.Key); err != nil {
+					return err
+				}
+				if err := TranscodeJSON(arrVal[1], &target.Value); err != nil {
+					return err
+				}
+
+				env.asIdlTypeHashMap = &target
+			}
 			if _, ok := v["option"]; ok {
 				var target IdlTypeOption
 				if err := TranscodeJSON(temp, &target); err != nil {
@@ -335,6 +360,7 @@ func (env *IdlType) UnmarshalJSON(data []byte) error {
 type IdlType struct {
 	asString         IdlTypeAsString
 	asIdlTypeVec     *IdlTypeVec
+	asIdlTypeHashMap *IdlTypeHashMap
 	asIdlTypeOption  *IdlTypeOption
 	asIdlTypeDefined *IdlTypeDefined
 	asIdlTypeArray   *IdlTypeArray
@@ -345,6 +371,9 @@ func (env *IdlType) IsString() bool {
 }
 func (env *IdlType) IsIdlTypeVec() bool {
 	return env.asIdlTypeVec != nil
+}
+func (env *IdlType) IsIdlTypeHashMap() bool {
+	return env.asIdlTypeHashMap != nil
 }
 func (env *IdlType) IsIdlTypeOption() bool {
 	return env.asIdlTypeOption != nil
@@ -362,6 +391,9 @@ func (env *IdlType) GetString() IdlTypeAsString {
 }
 func (env *IdlType) GetIdlTypeVec() *IdlTypeVec {
 	return env.asIdlTypeVec
+}
+func (env *IdlType) GetIdlTypeHashMap() *IdlTypeHashMap {
+	return env.asIdlTypeHashMap
 }
 func (env *IdlType) GetIdlTypeOption() *IdlTypeOption {
 	return env.asIdlTypeOption

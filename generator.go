@@ -104,6 +104,11 @@ func genTypeName(idlTypeEnv IdlType) Code {
 			vec := idlTypeEnv.GetIdlTypeVec()
 			st.Index().Add(genTypeName(vec.Vec))
 		}
+	case idlTypeEnv.IsIdlTypeHashMap():
+		{
+			hashMap := idlTypeEnv.GetIdlTypeHashMap()
+			st.Map(genTypeName(hashMap.Key)).Add(genTypeName(hashMap.Value))
+		}
 	case idlTypeEnv.IsIdlTypeDefined():
 		{
 			st.Add(Id(idlTypeEnv.GetIdlTypeDefined().Defined))
